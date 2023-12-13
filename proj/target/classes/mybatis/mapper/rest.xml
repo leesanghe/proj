@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.future.my.rest.dao.IRestDAO">
+	<select id="getRestList" resultType="com.future.my.rest.vo.RestVO" parameterType="String">
+		select restrntaddr
+		      ,restrntnm
+		from rest
+		where 1=1
+		
+		 
+	
+		<choose>
+			<when test='commParent==null'> </when>
+			<when test='commParent!=null'>AND restrntaddr like '%'||#{restrntaddr} ||'%','%'||#{restrntnm} ||'%'</when>
+		</choose>
+	</select>
+	<insert id="restaurant" parameterType="com.future.my.rest.vo.RestVO">
+	INSERT INTO rest (
+	                     restrntnm,
+					    restrntzip,
+					    restrntaddr,
+					    restrntdtladdr,
+					    restrntinqrtel,
+					    rprsfod,
+					    salstime,
+					    hldyguid,
+					    restrntsumm,
+					    maplat,
+					    maplot
+	                   )
+	 			VALUES(
+	 			         #{restrntnm}
+	 			       , #{restrntzip}
+	 			       , #{restrntaddr}
+	 			       , #{restrntdtladdr}
+	 			       , #{restrntinqrtel}
+	 			       , #{rprsfod}
+	 			       , #{salstime}
+	 			       , #{hldyguid}
+	 			       , #{restrntsumm}
+	 			       , #{maplat}
+	 			       , #{maplot}
+	 			       
+	 			       )
+</insert>
+
+</mapper>
